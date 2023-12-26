@@ -177,7 +177,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         userid = query.from_user.id
         chat_type = query.message.chat.type
 
-        if chat_type == enums.ChatType.PRIVATE:
+        if chat_type == enums.ChatType.GROUP:
             grpid = await active_connection(str(userid))
             if grpid is not None:
                 grp_id = grpid
@@ -210,7 +210,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         userid = query.from_user.id
         chat_type = query.message.chat.type
 
-        if chat_type == enums.ChatType.PRIVATE:
+        if chat_type == enums.CChatType.GROUP:
             await query.message.reply_to_message.delete()
             await query.message.delete()
 
