@@ -10,7 +10,7 @@ mydb = myclient[DATABASE_NAME]
 
 
 
-async def add_filter(grp_id, text, reply_text, btn, file, alert):
+async def add_filter(text, reply_text, btn, file, alert):
     mycol = mydb[str(grp_id)]
     # mycol.create_index([('text', 'text')])
 
@@ -28,7 +28,7 @@ async def add_filter(grp_id, text, reply_text, btn, file, alert):
         logger.exception('Some error occured!', exc_info=True)
              
      
-async def find_filter(group_id, name):
+async def find_filter(name):
     mycol = mydb[str(group_id)]
     
     query = mycol.find( {"text":name})
