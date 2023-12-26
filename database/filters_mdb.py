@@ -47,18 +47,28 @@ async def find_filter(name):
         return None, None, None, None
 
 
-async def get_filters(group_id):
-    mycol = mydb[str(group_id)]
+async def get_filters():
+    collections = mydb.list_collection_names()
+
+    if "CONNECTION" in collections:
+        collections.remove("CONNECTION")
 
     texts = []
-    query = mycol.find()
-    try:
-        for file in query:
-            text = file['text']
-            texts.append(text)
-    except:
-        pass
+
+    for collection in collections:
+        mycol = mydb[collection]
+        query = mycol.find()
+
+        try:
+            for file in query:
+                text = file['text']
+                texts.append(text)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            pass
+
     return texts
+
 
 
 async def delete_filter(message, text, group_id):
